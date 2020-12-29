@@ -1,0 +1,87 @@
+package seleniumBootCamp;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class CreateOpportunity {
+
+	public static void main(String[] args) throws InterruptedException {
+
+		ChromeOptions op = new ChromeOptions();
+		op.addArguments("disable-infobars");
+
+		System.setProperty("webdriver.chrome.driver",
+				"/Users/palanimohan/Documents/Career/qualityEngineer/Softwares/drivers/chromedriver");
+		ChromeDriver driver = new ChromeDriver();
+
+		driver.manage().window().maximize();
+		driver.get("https://login.salesforce.com");
+
+		driver.findElementById("username").sendKeys("hari.radhakrishnan@testleaf.com");
+		driver.findElementById("password").sendKeys("India$123");
+		driver.findElementById("Login").click();
+
+		Thread.sleep(20000);
+
+		driver.findElementByClassName("slds-icon-waffle").click();
+
+		Thread.sleep(4000);
+
+		driver.findElementByXPath("//button[@class='slds-button']").click();
+
+		Thread.sleep(10000);
+
+		driver.findElementByXPath("//p[text()='Sales']").click();
+
+		Thread.sleep(10000);
+
+		WebElement oppDropDown = driver.findElementByXPath("//a[@title='Opportunities']");
+
+		Thread.sleep(3000);
+
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+
+		executor.executeScript("arguments[0].click();", oppDropDown);
+
+		Thread.sleep(5000);
+
+		driver.findElementByXPath("//a[@title='New']").click();
+
+		Thread.sleep(3000);
+		
+		String oppname = "Salesforce Automation by Palanimohan";
+
+		driver.findElementByXPath("//span[text()='Opportunity Name']//parent::label//following-sibling::input")
+				.sendKeys(oppname);
+
+		driver.findElementByXPath("//span[text()='Close Date']//parent::label//following-sibling::div/input").click();
+
+		driver.findElementByXPath("//button[text()='Today']").click();
+		
+		Thread.sleep(2000);
+		
+		driver.findElementByXPath("//span[text()='Stage' and (not(contains(@title,'Stage')))]//parent::span//following::div[1]").click();
+
+		Thread.sleep(2000);
+		
+		driver.findElementByXPath("//a[@title='Needs Analysis']").click();
+		
+		driver.findElementByXPath("//div[@class='inlineFooter']/div/div//child::button/span[text()='Save']").click();
+		
+		Thread.sleep(10000);
+		
+		String scannedtext = driver.findElementByXPath("//div[@class='slds-media__body']/h1/div//following::slot/slot/lightning-formatted-text").getText();
+		
+		if(scannedtext.trim().equals(oppname.trim())) {
+			System.out.println("Name Match");
+		}else {
+			System.out.println("Name mismatch");
+		}
+		
+		driver.quit();;
+		
+	}
+
+}
