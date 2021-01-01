@@ -19,8 +19,8 @@ public class CreateOpportunity {
 		driver.manage().window().maximize();
 		driver.get("https://login.salesforce.com");
 
-		driver.findElementById("username").sendKeys("hari.radhakrishnan@testleaf.com");
-		driver.findElementById("password").sendKeys("India$123");
+		driver.findElementById("username").sendKeys("cypress@testleaf.com");
+		driver.findElementById("password").sendKeys("Bootcamp@123");
 		driver.findElementById("Login").click();
 
 		Thread.sleep(20000);
