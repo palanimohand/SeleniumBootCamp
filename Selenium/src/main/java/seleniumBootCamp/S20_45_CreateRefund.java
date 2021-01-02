@@ -6,7 +6,7 @@ import java.util.Map;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class CreateRefund {
+public class S20_45_CreateRefund {
 
 	public static void main(String[] args) throws InterruptedException {
 

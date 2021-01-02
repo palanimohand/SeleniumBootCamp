@@ -5,7 +5,7 @@ import java.util.Map;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class CreateChart {
+public class S20_46_CreateChart {
 
 	public static void main(String[] args) throws InterruptedException {
 		

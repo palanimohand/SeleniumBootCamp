@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class CreateOpportunity {
+public class S20_2_CreateOpportunity {
 
 	public static void main(String[] args) throws InterruptedException {
 
