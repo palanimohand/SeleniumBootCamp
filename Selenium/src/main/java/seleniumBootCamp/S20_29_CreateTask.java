@@ -40,7 +40,7 @@ public class S20_29_CreateTask {
 		
 		Thread.sleep(2000);
 		
-		driver.findElementByXPath("//span[text()='Name']//parent::label//following::input[1]").click();
+		driver.findElementByXPath("//span[text()='Name']//parent::label//following::input[1]").sendKeys("Sarath M");
 		
 		Thread.sleep(1000);
 		
