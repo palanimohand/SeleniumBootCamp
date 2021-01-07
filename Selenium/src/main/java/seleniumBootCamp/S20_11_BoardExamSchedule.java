@@ -16,6 +16,8 @@ public class S20_11_BoardExamSchedule {
 
 	static String activeWindow;
 	static ChromeDriver driver;
+	static ArrayList<String> allWindows = new ArrayList<String>();
+	static Set<String> windowHandles;
 
 	public static void main(String[] args) throws InterruptedException {
 
@@ -45,50 +47,41 @@ public class S20_11_BoardExamSchedule {
 		Thread.sleep(20000);
 
 		driver.findElementByXPath("//div[@class='tileNavButton']/button/span[text()='Learn More']").click();
-
-		Set<String> windowHandles = driver.getWindowHandles();
-		ArrayList<String> allWindows = new ArrayList<String>();
-
-		switchToNextWindow(windowHandles, allWindows);
+		
+		switchToNextNewWindow();
 		Thread.sleep(3000);
 		Actions ac = new Actions(driver);
 		WebElement resources = driver.findElementByXPath("//span[text()='Resources']//parent::button");
 		WebElement certificate = driver.findElementByXPath("//span[text()='Salesforce Certification ']//parent::a");
 		ac.moveToElement(resources).build().perform();
 		certificate.click();
-		windowHandles = driver.getWindowHandles();
 		
-		switchToNextWindow(windowHandles, allWindows);
+		switchToNextNewWindow();
 		Thread.sleep(3000);
 		driver.findElementByXPath("//div[text()='Salesforce Architect']").click();
 		Thread.sleep(3000);
 		driver.findElementByXPath("//a[text()='Technical Architect']//preceding::a[text()='More Details']").click();
-		windowHandles = driver.getWindowHandles();
 		
-		switchToNextWindow(windowHandles, allWindows);
+		switchToNextNewWindow();
 		Thread.sleep(3000);
 		List<WebElement> scheduleFullTable = driver.findElements(By.xpath("//div[starts-with(@class,'slds-grid')]"));
-		ArrayList<Integer> plannedStatusPos = new ArrayList<Integer>();
 		List<WebElement> status = driver.findElements(
 				By.xpath("//div[starts-with(@class,'slds-grid')]/div[text()='Status']//following-sibling::div"));
 		
+		System.out.println("Planned Schedule details: ");
 		for (int i = 0; i < status.size(); i++) {
 			if (status.get(i).getText().trim().equals("Planning")) {
-				plannedStatusPos.add(i);
+				System.out.println("City: " + ((scheduleFullTable.get(i+1))
+						.findElement(By.xpath("./div[text()='City']//following-sibling::div[1]"))).getText());
+				System.out.println("Date: " + ((scheduleFullTable.get(i+1))
+						.findElement(By.xpath("./div[text()='Dates Available']//following-sibling::div[1]"))).getText());
 			}
-		}
-		
-		System.out.println("Planned Schedule details: ");
-		for (int j = 0; j < plannedStatusPos.size(); j++) {
-			System.out.println("City: " + ((scheduleFullTable.get(plannedStatusPos.get(j) + 1))
-					.findElement(By.xpath("./div[text()='City']//following-sibling::div[1]"))).getText());
-			System.out.println("Date: " + ((scheduleFullTable.get(plannedStatusPos.get(j) + 1))
-					.findElement(By.xpath("./div[text()='Dates Available']//following-sibling::div[1]"))).getText());
 		}
 		driver.quit();
 	}
 
-	public static void switchToNextWindow(Set<String> windowHandles, ArrayList<String> allWindows) {
+	public static void switchToNextNewWindow() {
+		windowHandles = driver.getWindowHandles();
 		for (String handle : windowHandles) {
 			while (!allWindows.contains(handle)) {
 				allWindows.add(handle);
