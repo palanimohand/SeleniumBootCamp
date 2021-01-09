@@ -79,7 +79,7 @@ public class S20_11_BoardExamSchedule {
 		}
 		driver.quit();
 	}
-
+	
 	public static void switchToNextNewWindow() {
 		windowHandles = driver.getWindowHandles();
 		for (String handle : windowHandles) {
