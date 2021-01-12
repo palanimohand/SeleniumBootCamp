@@ -12,11 +12,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class S20_2_CreateOpportunity {
-	
-	RemoteWebDriver driver;
+public class S20_2_CreateOpportunity extends BeforeExecution{
 	
 	@BeforeSuite
 	private void beforesuite() {
@@ -36,7 +33,7 @@ public class S20_2_CreateOpportunity {
 	@BeforeMethod
 	@Parameters({ "browser" })
 	public void start(String browser) {
-		new BeforeExecution().launchBrowser(browser);
+		launchBrowser(browser);
 	}
 
 	@Test

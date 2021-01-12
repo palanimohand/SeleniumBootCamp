@@ -16,7 +16,7 @@ public class BeforeExecution {
 	public RemoteWebDriver driver;
 	public WebDriverWait wait;
 
-	public RemoteWebDriver launchBrowser(String browser) {
+	public void launchBrowser(String browser) {
 
 		if (browser.equalsIgnoreCase("Chrome")) {
 
@@ -50,8 +50,11 @@ public class BeforeExecution {
 
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		return driver;
 
+	}
+	
+	public void goToUrl(String url) {
+		
 	}
 
 }

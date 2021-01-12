@@ -2,7 +2,6 @@ package seleniumBootCampTestNG;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -14,9 +13,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class S20_31_DeleteTask {
-
-	static RemoteWebDriver driver;
+public class S20_31_DeleteTask extends BeforeExecution{
 
 	@BeforeSuite
 	private void beforesuite() {
@@ -36,11 +33,11 @@ public class S20_31_DeleteTask {
 	@BeforeMethod
 	@Parameters({ "browser" })
 	public void start(String browser) {
-		new BeforeExecution().launchBrowser(browser);
+		launchBrowser(browser);
 	}
 
 	@Test(dependsOnMethods = { "seleniumBootCampTestNG.S20_30_EditTask.editTask" })
-	public static void deletetask() throws InterruptedException {
+	public void deletetask() throws InterruptedException {
 
 		driver.get("https://login.salesforce.com");
 

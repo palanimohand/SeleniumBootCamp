@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import java.util.ArrayList;
@@ -42,10 +41,10 @@ public class S20_11_BoardExamSchedule extends BeforeExecution{
 	@BeforeMethod
 	@Parameters({ "browser" })
 	public void start(String browser) {
-		new BeforeExecution().launchBrowser(browser);
+		launchBrowser(browser);
 	}
 
-	@Test(dataProvider = "objArray")
+	@Test
 	public void plannedBoardExam() throws InterruptedException {
 
 		driver.get("https://login.salesforce.com");
@@ -90,13 +89,6 @@ public class S20_11_BoardExamSchedule extends BeforeExecution{
 		}
 	}
 	
-	@DataProvider
-	public Object[][] objArray(){
-		Object[][] dp = null;
-		
-		return dp;
-	}
-
 	@AfterMethod
 	public void finish() {
 		driver.quit();

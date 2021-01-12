@@ -10,11 +10,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class S20_46_CreateChart {
-
-	static RemoteWebDriver driver;
+public class S20_46_CreateChart extends BeforeExecution{
 
 	@BeforeSuite
 	private void beforesuite() {
@@ -34,11 +31,11 @@ public class S20_46_CreateChart {
 	@BeforeMethod
 	@Parameters({ "browser" })
 	public void start(String browser) {
-		new BeforeExecution().launchBrowser(browser);
+		launchBrowser(browser);
 	}
 
 	@Test
-	public static void createChart() throws InterruptedException {
+	public void createChart() throws InterruptedException {
 
 		driver.get("https://login.salesforce.com");
 

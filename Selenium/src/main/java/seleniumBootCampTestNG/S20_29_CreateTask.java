@@ -10,11 +10,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-public class S20_29_CreateTask {
-
-	RemoteWebDriver driver;
+public class S20_29_CreateTask extends BeforeExecution{
 
 	@BeforeSuite
 	private void beforesuite() {
@@ -34,7 +31,7 @@ public class S20_29_CreateTask {
 	@BeforeMethod
 	@Parameters({ "browser" })
 	public void start(String browser) {
-		new BeforeExecution().launchBrowser(browser);
+		launchBrowser(browser);
 	}
 
 	@Test

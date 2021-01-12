@@ -2,7 +2,6 @@ package seleniumBootCampTestNG;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -14,10 +13,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class S20_30_EditTask {
+public class S20_30_EditTask extends BeforeExecution {
 	
-	RemoteWebDriver driver;
-
 	@BeforeSuite
 	private void beforesuite() {
 		System.out.println("Before Suite");
@@ -36,7 +33,7 @@ public class S20_30_EditTask {
 	@BeforeMethod
 	@Parameters({ "browser" })
 	public void start(String browser) {
-		new BeforeExecution().launchBrowser(browser);
+		launchBrowser(browser);
 	}
 
 	@Test(dependsOnMethods = {"seleniumBootCampTestNG.S20_29_CreateTask.createTask"})

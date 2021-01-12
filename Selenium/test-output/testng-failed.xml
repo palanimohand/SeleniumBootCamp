@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" verbose="10" name="Failed suite [Suite]">
-  <test thread-count="5" verbose="10" name="Test(failed)">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test thread-count="5" name="Test(failed)">
     <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="seleniumBootCampAssessment.FirstAssessment">
+      <class name="seleniumBootCampTestNG.S20_45_CreateRefund">
         <methods>
+          <include name="beforeClass"/>
+          <include name="aftersuite"/>
+          <include name="createRefund"/>
+          <include name="finish"/>
+          <include name="beforesuite"/>
           <include name="start"/>
-          <include name="createAndDeleteDashboard"/>
+          <include name="beforeTest"/>
+          <include name="afterclass"/>
+          <include name="afterTest"/>
         </methods>
-      </class> <!-- seleniumBootCampAssessment.FirstAssessment -->
+      </class> <!-- seleniumBootCampTestNG.S20_45_CreateRefund -->
+      <class name="seleniumBootCampTestNG.S20_46_CreateChart">
+        <methods>
+          <include name="createChart"/>
+          <include name="afterTest"/>
+          <include name="beforeTest"/>
+          <include name="finish"/>
+          <include name="afterclass"/>
+          <include name="beforesuite"/>
+          <include name="start"/>
+          <include name="beforeClass"/>
+          <include name="aftersuite"/>
+        </methods>
+      </class> <!-- seleniumBootCampTestNG.S20_46_CreateChart -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

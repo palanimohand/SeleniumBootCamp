@@ -1,9 +1,6 @@
 package seleniumBootCampAssessment;
 
 import org.testng.annotations.Test;
-import java.util.List;
-
-import org.apache.commons.math3.analysis.function.Exp;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -12,7 +9,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
-
 import seleniumBootCampTestNG.BeforeExecution;
 
 public class FirstAssessment extends BeforeExecution {
@@ -20,7 +16,7 @@ public class FirstAssessment extends BeforeExecution {
 	@BeforeMethod
 	@Parameters({ "browser" })
 	public void start(String browser) {
-		driver = new BeforeExecution().launchBrowser(browser);
+		launchBrowser(browser);
 	}
 
 	@Test
@@ -44,6 +40,7 @@ public class FirstAssessment extends BeforeExecution {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		WebElement mm = driver.findElementByXPath("//button[@title='Show Navigation Menu']");
 		executor.executeScript("arguments[0].click();", mm);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Home' and starts-with(@class,'menuLabel')]")));
 		WebElement dd = driver.findElementByXPath("//span[text()='Home' and starts-with(@class,'menuLabel')]");
 		executor.executeScript("arguments[0].click();", dd);
 		String openCount = driver
@@ -81,12 +78,11 @@ public class FirstAssessment extends BeforeExecution {
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@title='New Dashboard']")));
 		driver.findElementByXPath("//div[@title='New Dashboard']").click();
-		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(0));
-		// wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("dashboardNameInput")));
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(driver.findElementByXPath("//iframe[@title='dashboard']")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("dashboardNameInput")));
 		driver.findElementById("dashboardNameInput").sendKeys("Palanimohan_Workout");
 		driver.findElementById("dashboardDescriptionInput").sendKeys("Testing");
 		driver.findElementById("submitBtn").click();
-
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'doneEditing')]")));
 		WebElement done = driver.findElementByXPath("//button[contains(@class,'doneEditing')]");
 		executor.executeScript("arguments[0].click();", done);
