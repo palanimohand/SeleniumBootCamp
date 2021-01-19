@@ -1,63 +1,35 @@
 package seleniumBootCampTestNG;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class S20_30_EditTask extends BeforeExecution {
-	
-	@BeforeSuite
-	private void beforesuite() {
-		System.out.println("Before Suite");
-	}
 
-	@BeforeTest
-	private void beforeTest() {
-		System.out.println("Before Test");
-	}
+	@Test(groups = { "a" }, dataProvider = "provideData")
+	public void editTask(String browser, String username, String password, String url) throws InterruptedException {
 
-	@BeforeClass
-	private void beforeClass() {
-		System.out.println("Before Class");
-	}
-
-	@BeforeMethod
-	@Parameters({ "browser" })
-	public void start(String browser) {
 		launchBrowser(browser);
-	}
+		driver.get(url);
 
-	@Test(dependsOnMethods = {"seleniumBootCampTestNG.S20_29_CreateTask.createTask"})
-	public void editTask() throws InterruptedException {
-
-		driver.get("https://login.salesforce.com");
-
-		driver.findElementById("username").sendKeys("cypress@testleaf.com");
-		driver.findElementById("password").sendKeys("Bootcamp@123");
+		driver.findElementById("username").sendKeys(username);
+		driver.findElementById("password").sendKeys(password);
 		driver.findElementById("Login").click();
 
-		Thread.sleep(20000);
+		waitToBeClickable(By.className("slds-icon-waffle"));
 
 		driver.findElementByClassName("slds-icon-waffle").click();
 
-		Thread.sleep(4000);
+		waitToBeClickable(By.xpath("//button[@class='slds-button']"));
 
 		driver.findElementByXPath("//button[@class='slds-button']").click();
 
-		Thread.sleep(10000);
+		waitToBeClickable(By.xpath("//p[text()='Sales']"));
 
 		driver.findElementByXPath("//p[text()='Sales']").click();
 
-		Thread.sleep(10000);
+		waitToBeClickable(By.xpath("//a[@title='Tasks']"));
 
 		WebElement taskdd = driver.findElementByXPath("//a[@title='Tasks']");
 
@@ -65,25 +37,25 @@ public class S20_30_EditTask extends BeforeExecution {
 
 		action.click(taskdd).build().perform();
 
-		Thread.sleep(4000);
+		waitToBeClickable(By.xpath("//a[contains(@class,'downIcon')]"));
 
 		driver.findElementByXPath("//a[contains(@class,'downIcon')]").click();
 
-		Thread.sleep(1000);
+		waitToBeClickable(By.xpath("//li[contains(@class,'slds-dropdown')]//span[text()='Recently Viewed']"));
 
 		driver.findElementByXPath("//li[contains(@class,'slds-dropdown')]//span[text()='Recently Viewed']").click();
 
-		Thread.sleep(1000);
+		waitToBeClickable(By.xpath("//a[@title='Show 13 more actions']"));
 
 		driver.findElementByXPath("//a[@title='Show 13 more actions']").click();
 
-		Thread.sleep(2000);
+		waitToBeClickable(By.xpath("//div[@title='Edit']"));
 
 		WebElement editdd = driver.findElementByXPath("//div[@title='Edit']");
 
 		action.click(editdd).build().perform();
 
-		Thread.sleep(3000);
+		waitToBeClickable(By.xpath("//span[text()='Due Date']//parent::label//following-sibling::div/input"));
 
 		driver.findElementByXPath("//span[text()='Due Date']//parent::label//following-sibling::div/input").click();
 
@@ -92,15 +64,15 @@ public class S20_30_EditTask extends BeforeExecution {
 		driver.findElementByXPath("//span[text()='Priority']//parent::span//following::div[@class='uiMenu'][2]")
 				.click();
 
-		Thread.sleep(1000);
+		waitToBeClickable(By.xpath("//a[@title='Low']"));
 
 		driver.findElementByXPath("//a[@title='Low']").click();
 
-		Thread.sleep(2000);
+		waitToBeClickable(By.xpath("//div[@class='inlineFooter']/div/div//child::button/span[text()='Save']"));
 
 		driver.findElementByXPath("//div[@class='inlineFooter']/div/div//child::button/span[text()='Save']").click();
 
-		Thread.sleep(10000);
+		waitToBeClickable(By.xpath("//span[text()='Subject']//parent::div//following-sibling::div/span"));
 
 		String text = driver.findElementByXPath("//span[text()='Subject']//parent::div//following-sibling::div/span")
 				.getText();
@@ -112,25 +84,5 @@ public class S20_30_EditTask extends BeforeExecution {
 		}
 
 	}
-	
-	@AfterMethod
-	public void finish() {
-		driver.quit();
-	}
 
-	@AfterClass
-	public void afterclass() {
-		System.out.println("After Class");
-	}
-
-	@AfterTest
-	public void afterTest() {
-		System.out.println("After Test");
-	}
-
-	@AfterSuite
-	public void aftersuite() {
-		System.out.println("After Suite");
-	}
-	
 }

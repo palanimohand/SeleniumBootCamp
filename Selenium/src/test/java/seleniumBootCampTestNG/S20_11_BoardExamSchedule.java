@@ -1,64 +1,34 @@
 package seleniumBootCampTestNG;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Test;
 
-public class S20_11_BoardExamSchedule extends BeforeExecution{
+public class S20_11_BoardExamSchedule extends BeforeExecution {
 
 	String activeWindow;
 	ArrayList<String> allWindows = new ArrayList<String>();
 	Set<String> windowHandles;
 
-	@BeforeSuite
-	private void beforesuite() {
-		System.out.println("Before Suite");
-	}
+	@Test(groups = "easy",dataProvider = "provideData")
+	public void plannedBoardExam(String browser, String username, String password, String url) throws InterruptedException {
 
-	@BeforeTest
-	private void beforeTest() {
-		System.out.println("Before Test");
-	}
-
-	@BeforeClass
-	private void beforeClass() {
-		System.out.println("Before Class");
-	}
-
-	@BeforeMethod
-	@Parameters({ "browser" })
-	public void start(String browser) {
 		launchBrowser(browser);
-	}
+		driver.get(url);
 
-	@Test
-	public void plannedBoardExam() throws InterruptedException {
-
-		driver.get("https://login.salesforce.com");
-
-		driver.findElementById("username").sendKeys("cypress@testleaf.com");
-		driver.findElementById("password").sendKeys("Bootcamp@123");
+		driver.findElementById("username").sendKeys(username);
+		driver.findElementById("password").sendKeys(password);
 		driver.findElementById("Login").click();
 
-		Thread.sleep(20000);
-
+		waitToBeClickable(By.xpath("//div[@class='tileNavButton']/button/span[text()='Learn More']"));
 		driver.findElementByXPath("//div[@class='tileNavButton']/button/span[text()='Learn More']").click();
 
 		switchToNextNewWindow();
-		Thread.sleep(3000);
+		waitToBeClickable(By.xpath("//span[text()='Resources']//parent::button"));
 		Actions ac = new Actions(driver);
 		WebElement resources = driver.findElementByXPath("//span[text()='Resources']//parent::button");
 		WebElement certificate = driver.findElementByXPath("//span[text()='Salesforce Certification ']//parent::a");
@@ -66,13 +36,13 @@ public class S20_11_BoardExamSchedule extends BeforeExecution{
 		certificate.click();
 
 		switchToNextNewWindow();
-		Thread.sleep(3000);
+		waitToBeClickable(By.xpath("//div[text()='Salesforce Architect']"));
 		driver.findElementByXPath("//div[text()='Salesforce Architect']").click();
-		Thread.sleep(3000);
+		waitToBeClickable(By.xpath("//a[text()='Technical Architect']//preceding::a[text()='More Details']"));
 		driver.findElementByXPath("//a[text()='Technical Architect']//preceding::a[text()='More Details']").click();
 
 		switchToNextNewWindow();
-		Thread.sleep(3000);
+		waitToBeVisible(By.xpath("//div[starts-with(@class,'slds-grid')]"));
 		List<WebElement> scheduleFullTable = driver.findElements(By.xpath("//div[starts-with(@class,'slds-grid')]"));
 		List<WebElement> status = driver.findElements(
 				By.xpath("//div[starts-with(@class,'slds-grid')]/div[text()='Status']//following-sibling::div"));
@@ -88,27 +58,7 @@ public class S20_11_BoardExamSchedule extends BeforeExecution{
 			}
 		}
 	}
-	
-	@AfterMethod
-	public void finish() {
-		driver.quit();
-	}
 
-	@AfterClass
-	public void afterclass() {
-		System.out.println("After Class");
-	}
-
-	@AfterTest
-	public void afterTest() {
-		System.out.println("After Test");
-	}
-
-	@AfterSuite
-	public void aftersuite() {
-		System.out.println("After Suite");
-	}
-	
 	public void switchToNextNewWindow() {
 		windowHandles = driver.getWindowHandles();
 		for (String handle : windowHandles) {

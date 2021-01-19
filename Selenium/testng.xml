@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-  <test thread-count="5" name="Test">
-  <parameter name="browser" value="chrome"></parameter>
-    <classes>
-      <class name="seleniumBootCampTestNG.S20_31_DeleteTask"/>
-      <class name="seleniumBootCampTestNG.S20_11_BoardExamSchedule"/>
-      <class name="seleniumBootCampTestNG.S20_45_CreateRefund"/>
-      <class name="seleniumBootCampTestNG.S20_29_CreateTask"/>
-      <class name="seleniumBootCampTestNG.S20_30_EditTask"/>
-      <class name="seleniumBootCampTestNG.S20_32_CreateChartWOMandatroy"/>
-      <class name="seleniumBootCampTestNG.S20_2_CreateOpportunity"/>
-      <class name="seleniumBootCampTestNG.S20_46_CreateChart"/>
-    </classes>
-  </test> <!-- Test -->
-</suite> <!-- Suite -->
+<suite name="Suite" verbose='10'>
+	<listeners>
+		<listener
+			class-name="seleniumBootCampTestNG.ListenerFromTestNG"></listener>
+	</listeners>
+	<test thread-count="5" name="Test">
+		<parameter name="browser" value="chrome"></parameter>
+		<groups>
+			<define name="new">
+				<include name="easy"></include>
+				<include name="chart"></include>
+				<include name="a"></include>
+			</define>
+			<run>
+				<include name="new"></include>
+			</run>
+		</groups>
+		<classes>
+			<class name="seleniumBootCampTestNG.S20_31_DeleteTask" />
+			<class name="seleniumBootCampTestNG.S20_30_EditTask" />
+			<class name="seleniumBootCampTestNG.S20_11_BoardExamSchedule" />
+			<class name="seleniumBootCampTestNG.S20_2_CreateOpportunity" />
+			<class name="seleniumBootCampTestNG.S20_32_CreateChartWOMandatroy" />
+			<class name="seleniumBootCampTestNG.S20_46_CreateChart" />
+			<class name="seleniumBootCampTestNG.S20_45_CreateRefund" />
+		</classes>
+	</test> 
+</suite>

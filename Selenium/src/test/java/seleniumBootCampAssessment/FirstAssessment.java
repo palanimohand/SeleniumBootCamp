@@ -1,46 +1,36 @@
 package seleniumBootCampAssessment;
 
-import org.testng.annotations.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 import seleniumBootCampTestNG.BeforeExecution;
 
 public class FirstAssessment extends BeforeExecution {
 
-	@BeforeMethod
-	@Parameters({ "browser" })
-	public void start(String browser) {
+
+	@Test(groups = "service console", dataProvider = "provideData")
+	public void createAndDeleteDashboard(String browser, String userName, String passWord, String url) throws InterruptedException {
+
 		launchBrowser(browser);
-	}
+		driver.get(url);
 
-	@Test
-	public void createAndDeleteDashboard() throws InterruptedException {
-
-		driver.get("https://login.salesforce.com");
-
-		driver.findElementById("username").sendKeys("cypress@testleaf.com");
-		driver.findElementById("password").sendKeys("Bootcamp@123");
+		driver.findElementById("username").sendKeys(userName);
+		driver.findElementById("password").sendKeys(passWord);
 		driver.findElementById("Login").click();
 
-		wait = new WebDriverWait(driver, 30);
-
-		wait.until(ExpectedConditions.elementToBeClickable(By.className("slds-icon-waffle")));
+		waitToBeClickable(By.className("slds-icon-waffle"));
 		driver.findElementByClassName("slds-icon-waffle").click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='slds-button']")));
+		waitToBeClickable(By.xpath("//button[@class='slds-button']"));
 		driver.findElementByXPath("//button[@class='slds-button']").click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//p[text()='Service Console']")));
+		waitToBeClickable(By.xpath("//p[text()='Service Console']"));
 		driver.findElementByXPath("//p[text()='Service Console']").click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Show Navigation Menu']")));
+		waitToBeClickable(By.xpath("//button[@title='Show Navigation Menu']"));
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		WebElement mm = driver.findElementByXPath("//button[@title='Show Navigation Menu']");
 		executor.executeScript("arguments[0].click();", mm);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Home' and starts-with(@class,'menuLabel')]")));
+		waitToBeClickable(By.xpath("//span[text()='Home' and starts-with(@class,'menuLabel')]"));
 		WebElement dd = driver.findElementByXPath("//span[text()='Home' and starts-with(@class,'menuLabel')]");
 		executor.executeScript("arguments[0].click();", dd);
 		String openCount = driver
@@ -56,38 +46,36 @@ public class FirstAssessment extends BeforeExecution {
 		int sum = o + c;
 		if (sum < 10000) {
 			driver.findElementByXPath("//button[@title='Edit Goal']").click();
-			wait.until(ExpectedConditions
-					.elementToBeClickable(By.xpath("//input[contains(@class,'uiInputSmartNumber')]")));
+			waitToBeClickable(By.xpath("//input[contains(@class,'uiInputSmartNumber')]"));
 			driver.findElementByXPath("//input[contains(@class,'uiInputSmartNumber')]").clear();
 			driver.findElementByXPath("//input[contains(@class,'uiInputSmartNumber')]").sendKeys("10000");
 			driver.findElementByXPath("//span[contains(@class,'bBody') and text()='Save']").click();
 		} else {
 			driver.findElementByXPath("//button[@title='Edit Goal']").click();
-			wait.until(ExpectedConditions
-					.elementToBeClickable(By.xpath("//input[contains(@class,'uiInputSmartNumber')]")));
+			waitToBeClickable(By.xpath("//input[contains(@class,'uiInputSmartNumber')]"));
 			driver.findElementByXPath("//input[contains(@class,'uiInputSmartNumber')]").clear();
 			driver.findElementByXPath("//input[contains(@class,'uiInputSmartNumber')]").sendKeys(String.valueOf(sum));
 			driver.findElementByXPath("//span[contains(@class,'bBody') and text()='Save']").click();
 		}
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@title='Show Navigation Menu']")));
+		waitToBeClickable(By.xpath("//button[@title='Show Navigation Menu']"));
 		driver.findElementByXPath("//button[@title='Show Navigation Menu']").click();
-		wait.until(ExpectedConditions
-				.elementToBeClickable(By.xpath("//span[text()='Dashboards' and starts-with(@class,'menuLabel')]")));
+		waitToBeClickable(By.xpath("//span[text()='Dashboards' and starts-with(@class,'menuLabel')]"));
 		WebElement dd2 = driver.findElementByXPath("//span[text()='Dashboards' and starts-with(@class,'menuLabel')]");
 		executor.executeScript("arguments[0].click();", dd2);
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@title='New Dashboard']")));
+		waitToBeClickable(By.xpath("//div[@title='New Dashboard']"));
 		driver.findElementByXPath("//div[@title='New Dashboard']").click();
-		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(driver.findElementByXPath("//iframe[@title='dashboard']")));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("dashboardNameInput")));
+		waitForFrame(By.xpath("(//iframe[@title='dashboard'])[last()]"));
+		waitToBeVisible(By.id("dashboardNameInput"));
 		driver.findElementById("dashboardNameInput").sendKeys("Palanimohan_Workout");
 		driver.findElementById("dashboardDescriptionInput").sendKeys("Testing");
 		driver.findElementById("submitBtn").click();
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(@class,'doneEditing')]")));
-		WebElement done = driver.findElementByXPath("//button[contains(@class,'doneEditing')]");
-		executor.executeScript("arguments[0].click();", done);
-		wait.until(ExpectedConditions
-				.visibilityOf(driver.findElementByXPath("//span[starts-with(@class,'slds-page-header__title')]")));
+		driver.switchTo().defaultContent();
+		waitForFrame(By.xpath("(//iframe[@title='dashboard'])[last()]"));
+		waitToBeClickable(By.xpath("//button[contains(@class,'doneEditing') and text()='Done']"));
+		WebElement done = driver.findElementByXPath("//button[contains(@class,'doneEditing') and text()='Done']");
+		done.click();
+		waitToBeVisible(By.xpath("//span[starts-with(@class,'slds-page-header__title')]"));
 		String dashtitle = driver.findElementByXPath("//span[starts-with(@class,'slds-page-header__title')]").getText();
 		String dashDesc = driver.findElementByXPath("//p[@class='slds-page-header__info']").getText();
 		if (dashtitle.equals("Palanimohan_Workout") && dashDesc.equals("Testing")) {
@@ -95,34 +83,31 @@ public class FirstAssessment extends BeforeExecution {
 		} else {
 			System.out.println("The dashboard has not been created");
 		}
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Subscribe']")));
+		waitToBeClickable(By.xpath("//button[text()='Subscribe']"));
 		driver.findElementByXPath("//button[text()='Subscribe']").click();
-		wait.until(ExpectedConditions.elementToBeClickable(
-				By.xpath("//span[contains(@class,'button-group-button-label') and text()='Daily']")));
+		waitToBeClickable(By.xpath("//span[contains(@class,'button-group-button-label') and text()='Daily']"));
 		driver.findElementByXPath("//span[contains(@class,'button-group-button-label') and text()='Daily']").click();
 
 		Select opt = new Select(driver.findElementByTagName("select"));
 		opt.selectByVisibleText("10:00 AM");
 
 		driver.findElementByXPath("//span[text()='Save']").click();
-		wait.until(
-				ExpectedConditions.visibilityOf(driver.findElementByXPath("//span[contains(@class,'toastMessage')]")));
+		waitToBeVisible(By.xpath("//span[contains(@class,'toastMessage')]"));
 		String message = driver.findElementByXPath("//span[contains(@class,'toastMessage')]").getText();
 		if (message.equals("Your subscription is all set.")) {
 			System.out.println("Message Verified");
 		} else {
 			System.out.println("Message Incorrect");
 		}
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(@class,'close')]")));
+		waitToBeClickable(By.xpath("//div[contains(@class,'close')]"));
 		driver.findElementByXPath("//div[contains(@class,'close')]").click();
-		wait.until(ExpectedConditions.elementToBeClickable(
-				By.xpath("//a[@class='slds-nav-vertical__action' and text()='Private Dashboards']")));
+		waitToBeClickable(By.xpath("//a[@class='slds-nav-vertical__action' and text()='Private Dashboards']"));
 		driver.findElementByXPath("//a[@class='slds-nav-vertical__action' and text()='Private Dashboards']").click();
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[contains(@class,'search-text-field')]")));
+		waitToBeClickable(By.xpath("//input[contains(@class,'search-text-field')]"));
 		driver.findElementByXPath("//input[contains(@class,'search-text-field')]").sendKeys("Palanimohan_Workout");
 
-		// driver.close();
+		//driver.close();
 
 	}
 

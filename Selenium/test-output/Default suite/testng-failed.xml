@@ -3,110 +3,19 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="seleniumBootCampTestNG.S20_2_CreateOpportunity">
-        <methods>
-          <include name="start"/>
-          <include name="beforesuite"/>
-          <include name="finish"/>
-          <include name="createOpportunity"/>
-          <include name="afterTest"/>
-          <include name="beforeTest"/>
-          <include name="afterclass"/>
-          <include name="beforeClass"/>
-          <include name="aftersuite"/>
-        </methods>
-      </class> <!-- seleniumBootCampTestNG.S20_2_CreateOpportunity -->
-      <class name="seleniumBootCampTestNG.S20_11_BoardExamSchedule">
-        <methods>
-          <include name="plannedBoardExam"/>
-          <include name="aftersuite"/>
-          <include name="start"/>
-          <include name="beforeClass"/>
-          <include name="beforeTest"/>
-          <include name="afterTest"/>
-          <include name="finish"/>
-          <include name="afterclass"/>
-          <include name="beforesuite"/>
-        </methods>
-      </class> <!-- seleniumBootCampTestNG.S20_11_BoardExamSchedule -->
-      <class name="seleniumBootCampTestNG.S20_46_CreateChart">
-        <methods>
-          <include name="createChart"/>
-          <include name="afterTest"/>
-          <include name="beforeTest"/>
-          <include name="finish"/>
-          <include name="afterclass"/>
-          <include name="beforesuite"/>
-          <include name="start"/>
-          <include name="beforeClass"/>
-          <include name="aftersuite"/>
-        </methods>
-      </class> <!-- seleniumBootCampTestNG.S20_46_CreateChart -->
-      <class name="seleniumBootCampTestNG.S20_45_CreateRefund">
+      <class name="seleniumBootCampAssessment.FirstAssessment">
         <methods>
           <include name="beforeClass"/>
+          <include name="createAndDeleteDashboard"/>
           <include name="aftersuite"/>
-          <include name="createRefund"/>
-          <include name="start"/>
-          <include name="finish"/>
           <include name="beforesuite"/>
-          <include name="beforeTest"/>
-          <include name="afterclass"/>
-          <include name="afterTest"/>
-        </methods>
-      </class> <!-- seleniumBootCampTestNG.S20_45_CreateRefund -->
-      <class name="seleniumBootCampTestNG.S20_32_CreateChartWOMandatroy">
-        <methods>
-          <include name="beforeTest"/>
-          <include name="createChartWOMandatory"/>
-          <include name="afterTest"/>
-          <include name="finish"/>
-          <include name="afterclass"/>
-          <include name="beforesuite"/>
-          <include name="aftersuite"/>
-          <include name="start"/>
-          <include name="beforeClass"/>
-        </methods>
-      </class> <!-- seleniumBootCampTestNG.S20_32_CreateChartWOMandatroy -->
-      <class name="seleniumBootCampTestNG.S20_31_DeleteTask">
-        <methods>
-          <include name="aftersuite"/>
-          <include name="beforeClass"/>
-          <include name="afterTest"/>
-          <include name="afterclass"/>
-          <include name="beforesuite"/>
-          <include name="start"/>
-          <include name="deletetask"/>
-          <include name="beforeTest"/>
-          <include name="finish"/>
-        </methods>
-      </class> <!-- seleniumBootCampTestNG.S20_31_DeleteTask -->
-      <class name="seleniumBootCampTestNG.S20_30_EditTask">
-        <methods>
-          <include name="finish"/>
-          <include name="beforeTest"/>
-          <include name="start"/>
-          <include name="beforesuite"/>
-          <include name="afterclass"/>
-          <include name="editTask"/>
-          <include name="afterTest"/>
-          <include name="beforeClass"/>
-          <include name="aftersuite"/>
-        </methods>
-      </class> <!-- seleniumBootCampTestNG.S20_30_EditTask -->
-      <class name="seleniumBootCampTestNG.S20_29_CreateTask">
-        <methods>
-          <include name="aftersuite"/>
-          <include name="beforeClass"/>
           <include name="afterTest"/>
           <include name="start"/>
-          <include name="beforesuite"/>
-          <include name="createTask"/>
-          <include name="afterclass"/>
           <include name="finish"/>
           <include name="beforeTest"/>
+          <include name="afterclass"/>
         </methods>
-      </class> <!-- seleniumBootCampTestNG.S20_29_CreateTask -->
+      </class> <!-- seleniumBootCampAssessment.FirstAssessment -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
