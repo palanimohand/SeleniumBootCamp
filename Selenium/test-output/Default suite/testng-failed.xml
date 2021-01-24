@@ -6,7 +6,7 @@
       <class name="seleniumBootCampAssessment.FirstAssessment">
         <methods>
           <include name="beforeClass"/>
-          <include name="createAndDeleteDashboard"/>
+          <include name="createAndDeleteDashboard" invocation-numbers="0"/>
           <include name="aftersuite"/>
           <include name="beforesuite"/>
           <include name="afterTest"/>

@@ -1,18 +1,15 @@
 package seleniumBootCampTestNG;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 public class S20_2_CreateOpportunity extends BeforeExecution {
 
 	@Test(groups = "easy", dataProvider = "provideData")
-	public void createOpportunity(String browser, String username, String password, String url) throws InterruptedException {
+	public void createOpportunity(String browser, String username, String password, String url)
+			throws InterruptedException {
 
 		launchBrowser(browser);
 		driver.get(url);
@@ -81,66 +78,6 @@ public class S20_2_CreateOpportunity extends BeforeExecution {
 		} else {
 			System.out.println("Name mismatch");
 		}
-
-	}
-
-	@Test(groups = { "easy" }, enabled = false)
-	public void createTask() throws InterruptedException {
-
-		driver.get("https://login.salesforce.com");
-
-		driver.findElementById("username").sendKeys("cypress@testleaf.com");
-		driver.findElementById("password").sendKeys("Bootcamp@123");
-		driver.findElementById("Login").click();
-
-		waitToBeClickable(By.xpath("//a[starts-with(@class,'globalCreateTrigger')]"));
-
-		driver.findElementByXPath("//a[starts-with(@class,'globalCreateTrigger')]").click();
-
-		waitToBeClickable(By.xpath("//a[@title='New Task']"));
-
-		driver.findElementByXPath("//a[@title='New Task']").click();
-
-		waitToBeClickable(By.xpath("//span[text()='Name']//parent::label//following::input[1]"));
-
-		driver.findElementByXPath("//span[text()='Name']//parent::label//following::input[1]").sendKeys("Sarath M");
-
-		waitToBeClickable(By.xpath("//div[@title='Sarath M']"));
-
-		driver.findElementByXPath("//div[@title='Sarath M']").click();
-
-		driver.findElementByXPath("//span[text()='Status']//parent::span//following::a[1]").click();
-
-		driver.findElementByXPath("//a[@title='Waiting on someone else']").click();
-
-		driver.findElementByXPath("//label[text()='Subject']//parent::label//following::input[1]")
-				.sendKeys("Boot Camp");
-
-		driver.findElementByXPath("//button[contains(@class,'publisherShareButton')]").click();
-
-		waitToBeClickable(By.xpath("//span[contains(@class,'forceActionsText')]"));
-
-		String txt = driver.findElementByXPath("//span[contains(@class,'forceActionsText')]").getText();
-
-		System.out.println(txt);
-
-		assertTrue((txt.contains("Task") && txt.contains("was created")), "Match");
-
-		SoftAssert sa = new SoftAssert();
-
-		sa.assertEquals((txt.contains("Task") && txt.contains("was created")), false, "Mismatch is the text");
-
-		System.out.println("Text to be printed");
-
-		assertEquals((txt.contains("Task") && txt.contains("was created")), false, "Mismatch is the text");
-
-		// assertNull(txt);
-
-		// assertSame(txt, txt);
-
-		System.out.println("After Assert Statement");
-
-		sa.assertAll();
 
 	}
 

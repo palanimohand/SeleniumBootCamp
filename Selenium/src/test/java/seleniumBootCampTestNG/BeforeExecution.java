@@ -13,6 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -33,8 +34,8 @@ import org.testng.annotations.DataProvider;
 
 public class BeforeExecution {
 
-	public RemoteWebDriver driver;
-	public WebDriverWait wait;
+	public static RemoteWebDriver driver;
+	public static WebDriverWait wait ;
 
 	@BeforeSuite(alwaysRun = true)
 	public void beforesuite() {
@@ -118,30 +119,43 @@ public class BeforeExecution {
 
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		wait = new WebDriverWait(driver, 30);
 
 	}
 
-	public void goToUrl(String url) {
-
+	public void type(WebElement ele, String text) {
+		waitToBeVisible(ele);
+		ele.sendKeys(text);
+	}
+	
+	public void click(WebElement ele) {
+		waitToBeClickable(ele);
+		ele.click();
 	}
 
 	public void waitToBeClickable(By locator) {
-		wait = new WebDriverWait(driver, 15);
 		wait.until(ExpectedConditions.elementToBeClickable(locator));
 	}
-
-	public void waitToBeVisible(By locator) {
-		wait = new WebDriverWait(driver, 15);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+	
+	public void waitToBeClickable(WebElement ele) {
+		wait.until(ExpectedConditions.elementToBeClickable(ele));
 	}
 
+
+	public void waitToBeVisible(By locator) {
+		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+	}
+	
+	public void waitToBeVisible(WebElement webelement) {
+		wait.until(ExpectedConditions.visibilityOf(webelement));
+	}
+
+
 	public void waitToBeInvisible(By locator) {
-		wait = new WebDriverWait(driver, 15);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
 	}
 
 	public void waitForFrame(By locator) {
-		wait = new WebDriverWait(driver, 15);
 		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(locator));
 	}
 
