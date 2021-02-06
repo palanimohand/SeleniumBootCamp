@@ -243,7 +243,7 @@ public class BeforeExecution {
 	@DataProvider
 	public Object[][] provideData() throws IOException {
 		XSSFWorkbook xcel = new XSSFWorkbook(new FileInputStream(
-				new File("/Users/palanimohan/git/Local Repository/Selenium/Data/Data for BootCamp.xlsx")));
+				new File("/Users/palanimohan/git/Local Repository/BootCampPOM/Data/Data for BootCamp.xlsx")));
 		XSSFSheet sheet = xcel.getSheet(sheetName);
 		int rowNum = sheet.getPhysicalNumberOfRows();
 		int colNum = (int) sheet.getRow(0).getLastCellNum();
