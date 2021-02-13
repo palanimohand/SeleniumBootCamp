@@ -6,7 +6,7 @@ import org.testng.asserts.Assertion;
 import pages.Login;
 import utils.BeforeExecution;
 
-public class S20_32_CreateChartWOMandatroy extends BeforeExecution {
+public class S20_32_CreateTaskWOMandatroy extends BeforeExecution {
 
 	@BeforeClass(alwaysRun = true)
 	public void setData() {

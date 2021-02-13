@@ -9,7 +9,7 @@ public class TaskListingPage extends BeforeExecution{
 	
 	By listingDisplay = By.xpath("//a[contains(@class,'downIcon')]");
 	By recentlyViewed = By.xpath("//li[contains(@class,'slds-dropdown')]//span[text()='Recently Viewed']");
-	By moreActions = By.xpath("//a[@title='Show 13 more actions']");
+	By moreActions = By.xpath("//a[contains(@title,'more actions')]");
 	By edit = By.xpath("//div[@title='Edit']");
 	By delete = By.xpath("//div[@title='Delete']");
 	By deletewarn = By.xpath("//span[text()='Delete']");

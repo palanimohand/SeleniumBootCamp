@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 
-public class S20_32_CreateChartWOMandatroy {
+public class S20_32_CreateTaskWOMandatory {
 
 	public static void main(String[] args) throws InterruptedException {
 

@@ -62,7 +62,7 @@ public class S20_30_EditTask {
 
 		Thread.sleep(1000);
 
-		driver.findElementByXPath("//a[@title='Show 13 more actions']").click();
+		driver.findElementByXPath("//a[contains(@title,'more actions')]").click();
 
 		Thread.sleep(2000);
 
